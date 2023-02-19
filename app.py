@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 plt.style.use('ggplot')
 play = pd.read_csv('women_player.csv')
 df = pd.read_csv('women_t20.csv')
+df['date']=pd.to_datetime(df['date'])
+df.date=df.date.dt.year
 
 def player_detail():
     st.title('Player performance')
@@ -24,7 +26,7 @@ def player_detail():
 
 
     with col2:
-        data = test[(test.batter.isin(df1[0]))&(test.over.between(over[0],over[1]))].groupby('batter')['total_run'].mean().sort_values(ascending=False)
+        data = test[(test.batter.isin(df1[0]))&(test.over.between(over[0],over[1]))&(test.date.between(year[0],year[1]))].groupby('batter')['total_run'].mean().sort_values(ascending=False)
         Data = pd.DataFrame(data)
         Data['total_run'] = Data['total_run'] * 100
         st.subheader('Strike rate')
@@ -87,6 +89,14 @@ elif option23 == '0,6':
 
 elif option23 == '14,19':
     over = 14,19
+
+option24 = st.sidebar.selectbox('select Year',['21,23','All'])
+
+if option24 == '21,23':
+    year = 2021,2023
+
+elif option24 == 'all':
+    year = 2019,2023
 
 btn1=st.sidebar.button('Add Player')
 #btn2=st.sidebar.button('Show Player')
