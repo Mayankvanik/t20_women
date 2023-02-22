@@ -20,8 +20,8 @@ def player_detail():
         st.subheader('Total Run')
         #fig = plt.figure(figsize=(12, 3))
         fig, ax = plt.subplots()
-        ax.bar(sec.index, sec.values)
-        plt.xticks(rotation=90)
+        plt.barh(sec.index, sec.values)
+        plt.xticks(rotation=00)
         st.pyplot(fig)
 
 
@@ -38,8 +38,8 @@ def player_detail():
         ct = test[test.bowler.isin(df1[0])].groupby('bowler')['total_run'].count().sort_values(ascending=False)
         st.subheader('Total Boll Count')
         fig1, ax1 = plt.subplots()
-        ax1.bar(ct.index, ct.values)
-        plt.xticks(rotation=90)
+        plt.barh(ct.index, ct.values)
+        plt.xticks(rotation=00)
         st.pyplot(fig1)
 
     with col4:
